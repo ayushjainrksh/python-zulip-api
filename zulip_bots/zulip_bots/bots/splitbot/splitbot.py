@@ -38,20 +38,39 @@ class splitBotHandler(object):
             if(message['content'] == "friends"):
 
                 newheader = {
-                    "Host": "localhost:5000",
-                    "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:71.0) Gecko/20100101 Firefox/71.0",
-                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
-                    "Accept-Language": "en-US,en;q=0.5",
-                    "Accept-Encoding": "gzip, deflate",
-                    "Connection": "keep-alive",
+                    # "Host": "localhost:5000",
+                    # "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:71.0) Gecko/20100101 Firefox/71.0",
+                    # "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                    # "Accept-Language": "en-US,en;q=0.5",
+                    # "Accept-Encoding": "gzip, deflate",
+                    # "Connection": "keep-alive",
                     "Cookie": "__stripe_mid=46f91668-48b6-4449-96cb-cf7bcce6a95c; csrftoken=Q1tTftcuQwjqbaPA1xud8b1gev0bIs8d1gpWqtV0osQBgXP0SDrjJCnqy1SimrUb; _tccl_visitor=22317f10-6470-42de-9e31-0ba89483e2cd; sessionid=xfh43mgvcwks0a806mkxgt06nrc1dmpm; session=.eJxNy8EKgjAYAOB32dlDRIl0c2bpCHI2Sb3IsKFN29DfKSK-e12ijt_hWxAvSwFQDLoRCh0WpLkZ6i8RCYymgrrKuHQa6dbGWBhPEq8hAT5BKzszShkpZP3HAkTZi-HzQ8xYlapz9oBGc8EgzLMk2JgYkjpmt1LfSXX1W4pWC_2Sx6Ie8hm6k-MEF-cY7vWEefa0026YcxvLl6E76aP1DWIyQpQ.XjVhVQ.U9bqMTonHa4-vQPMcj1FAu7yO4U",
-                    "Upgrade-Insecure-Requests": "1"
+                    # "Upgrade-Insecure-Requests": "1"
                 }
                 help_content = requests.get("http://localhost:5000/friends", headers = newheader)
                 print(help_content.text)
                 output_str = ""
                 for x,y  in zip(json.loads(help_content.text)['friends'],json.loads(help_content.text)['balances']):
                     output_str = output_str + x + "\t" + y + "\n"
+                    
+            elif(message['content'] == "groups"):
+
+                newheader = {
+                    # "Host": "localhost:5000",
+                    # "User-Agent": "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:71.0) Gecko/20100101 Firefox/71.0",
+                    # "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+                    # "Accept-Language": "en-US,en;q=0.5",
+                    # "Accept-Encoding": "gzip, deflate",
+                    # "Connection": "keep-alive",
+                    "Cookie": "__stripe_mid=46f91668-48b6-4449-96cb-cf7bcce6a95c; csrftoken=Q1tTftcuQwjqbaPA1xud8b1gev0bIs8d1gpWqtV0osQBgXP0SDrjJCnqy1SimrUb; _tccl_visitor=22317f10-6470-42de-9e31-0ba89483e2cd; sessionid=xfh43mgvcwks0a806mkxgt06nrc1dmpm; session=.eJxNy8EKgjAYAOB32dlDRIl0c2bpCHI2Sb3IsKFN29DfKSK-e12ijt_hWxAvSwFQDLoRCh0WpLkZ6i8RCYymgrrKuHQa6dbGWBhPEq8hAT5BKzszShkpZP3HAkTZi-HzQ8xYlapz9oBGc8EgzLMk2JgYkjpmt1LfSXX1W4pWC_2Sx6Ie8hm6k-MEF-cY7vWEefa0026YcxvLl6E76aP1DWIyQpQ.XjVhVQ.U9bqMTonHa4-vQPMcj1FAu7yO4U",
+                    # "Upgrade-Insecure-Requests": "1"
+                }
+                help_content = requests.get("http://localhost:5000/groups", headers = newheader)
+                print(help_content.text)
+                output_str = ""
+                for x,y in zip(json.loads(help_content.text)['groups'],json.loads(help_content.text)['balances']):
+                    output_str = output_str + x + "\t" +str(y) + "\n"
+               
             else:
                 help_content = requests.get("http://localhost:5000/help", headers = headers)
                 output_str = help_content.text
